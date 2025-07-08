@@ -1,7 +1,31 @@
 "use client";
+
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import ApprovalDialog from "./ApprovalDialog";
 import Link from "next/link";
 
 function Navbar() {
+  const router = useRouter();
+  const [showApproval, setShowApproval] = useState(false);
+  const [route, setRoute] = useState("");
+
+  const handleApproval = (username: string, password: string) => {
+    //TODO: needs api
+    // for API simulation
+    if (username === "1" && password === "1") {
+      router.push(route);
+      setShowApproval(false);
+    } else {
+      alert("User atau password salah!");
+    }
+  };
+
+  const handleRouteClick = (href: string) => {
+    setRoute(href);
+    setShowApproval(true);
+  };
+
   const columns = [
     {
       title: "DATA PB",
@@ -63,37 +87,65 @@ function Navbar() {
       ],
     },
   ];
-  
 
   return (
-    <nav className="flex gap-4 bg-white px-4 py-2 shadow [&>*]:font-semibold relative z-10">
-      {columns.map((column) => (
-        <div key={column.key} className="relative group">
-          <Link
-            href={`/${column.key}`}
-            className={`p-2 hover:bg-blue-400 text-sm inline-block hover:text-white ${
-              column.key === "psp" ? "px-4" : ""
-            }`}
-          >
-            {column.title}
-          </Link>
+    <>
+      <nav className="flex gap-4 bg-white px-4 py-2 shadow [&>*]:font-semibold relative z-10">
+        {columns.map((column) => (
+          <div key={column.key} className="relative group">
+            {column.key === "setting" ? (
+              <Link
+                className="p-2 hover:bg-blue-400 text-sm inline-block hover:text-white cursor-pointer"
+                href={`/${column.key}`}
+              >
+                {column.title}
+              </Link>
+            ) : (
+              <div
+                className={`p-2 hover:bg-blue-400 text-sm inline-block hover:text-white cursor-pointer ${
+                  column.key === "psp" ? "px-4" : ""
+                }`}
+              >
+                {column.title}
+              </div>
+            )}
 
-          {column.children && (
-            <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white border rounded shadow-md min-w-[150px] transition-all duration-900 ease-in-out">
-              {column.children.map((sub) => (
-                <Link
-                  key={sub.key}
-                  href={`/${sub.key}`}
-                  className="px-2 py-1 text-sm hover:bg-blue-400 text-black min-w-max hover:text-white"
-                >
-                  {sub.title}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-    </nav>
+            {column.children && (
+              <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white border rounded shadow-md min-w-[150px] transition-all duration-900 ease-in-out">
+                {column.children.map((sub) =>
+                  (column.key === "data-pb" && sub.key === "upload-pb-idm") ||
+                  (column.key === "data-dpd" &&
+                    sub.key === "send-ke-jalur-dpd") ? (
+                    <div
+                      key={sub.key}
+                      className={`px-2 py-1 text-sm min-w-max  text-gray-200 hover:text-gray-200 hover:bg-white cursor-not-allowed`}
+                    >
+                      {sub.title}
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() =>
+                        handleRouteClick(`/${column.key}/${sub.key}`)
+                      }
+                      key={sub.key}
+                      className="px-2 py-1 text-sm hover:bg-blue-400 text-black min-w-max hover:text-white cursor-pointer"
+                    >
+                      {sub.title}
+                    </div>
+                  )
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </nav>
+
+      <ApprovalDialog
+        visible={showApproval}
+        onClose={() => setShowApproval(false)}
+        onApprove={handleApproval}
+      />
+    </>
   );
 }
 
