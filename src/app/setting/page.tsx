@@ -47,7 +47,7 @@ export default function SettingPage() {
         setLoading(false);
         return;
       }
-
+      //TODO: needs api
       const res = await fetch("/api/settings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -78,7 +78,8 @@ export default function SettingPage() {
               onChange={(e) => handleChange("pathPdf", e.target.value)}
               className="flex-1 bg-white text-black px-2 py-1 rounded"
             />
-            <button className="bg-white text-black px-2 py-1 rounded">
+            {/* //!The last choice was to open download window for user to choose path manually each time they download a pdf.  */}
+            <button className="bg-white text-black px-2 py-1 rounded" onClick={() => alert("Functionality hasn't been applied. Check the code for more explanation")}>
               📁
             </button>
           </div>
