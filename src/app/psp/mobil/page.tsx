@@ -140,25 +140,27 @@ export default function MobilPage() {
       <table className="w-full bg-white text-black rounded">
         <thead className="bg-gray-300">
           <tr>
-            <th className="p-2 text-left">Tipe Mobil</th>
-            <th className="p-2 text-left">Panjang</th>
-            <th className="p-2 text-left">Lebar</th>
-            <th className="p-2 text-left">Tinggi</th>
-            <th className="p-2 text-left">Volume</th>
-            <th className="p-2 text-left">Allowance</th>
+            <th className="p-2 text-left border border-gray-400">Tipe Mobil</th>
+            <th className="p-2 text-left border border-gray-400">Panjang</th>
+            <th className="p-2 text-left border border-gray-400">Lebar</th>
+            <th className="p-2 text-left border border-gray-400">Tinggi</th>
+            <th className="p-2 text-left border border-gray-400">Volume</th>
+            <th className="p-2 text-left border border-gray-400">Allowance</th>
           </tr>
         </thead>
         <tbody>
           {mobilList.map((mobil) => (
             <tr key={mobil.tipe} className="hover:bg-blue-100">
-              <td className="p-2">{mobil.tipe}</td>
-              <td className="p-2">{mobil.panjang}</td>
-              <td className="p-2">{mobil.lebar}</td>
-              <td className="p-2">{mobil.tinggi}</td>
-              <td className="p-2">
+              <td className="p-2 border border-gray-400">{mobil.tipe}</td>
+              <td className="p-2 border border-gray-400">{mobil.panjang}</td>
+              <td className="p-2 border border-gray-400">{mobil.lebar}</td>
+              <td className="p-2 border border-gray-400">{mobil.tinggi}</td>
+              <td className="p-2 border border-gray-400">
                 {(mobil.panjang * mobil.lebar * mobil.tinggi).toLocaleString()}
               </td>
-              <td className="p-2">{mobil.allowance.toFixed(2)}</td>
+              <td className="p-2 border border-gray-400">
+                {mobil.allowance.toFixed(2)}
+              </td>
             </tr>
           ))}
         </tbody>
