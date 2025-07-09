@@ -39,6 +39,7 @@ function ApprovalDialog({
         <div className="flex justify-end gap-2">
           <button
             onClick={() => onApprove(username, password)}
+            autoFocus
             className="px-3 py-1 bg-green-500 text-white rounded cursor-pointer hover:bg-green-600"
           >
             Submit
