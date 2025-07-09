@@ -13,9 +13,9 @@ function ApprovalDialog({
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    setUsername("")
-    setPassword("")
-  }, [visible])
+    setUsername("");
+    setPassword("");
+  }, [visible]);
 
   if (!visible) return null;
 
@@ -27,6 +27,7 @@ function ApprovalDialog({
           className="border p-2 w-full text-sm mb-2"
           placeholder="Username"
           value={username}
+          autoFocus
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
@@ -39,7 +40,6 @@ function ApprovalDialog({
         <div className="flex justify-end gap-2">
           <button
             onClick={() => onApprove(username, password)}
-            autoFocus
             className="px-3 py-1 bg-green-500 text-white rounded cursor-pointer hover:bg-green-600"
           >
             Submit
