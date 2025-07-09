@@ -24,7 +24,7 @@ const dummyData = {
   ],
 };
 
-export default function MobilSettings() {
+export default function MobilPage() {
   const [currentTab, setCurrentTab] = useState<"IDM" | "OMI">("IDM");
   const [form, setForm] = useState<Mobil>({
     tipe: "",
