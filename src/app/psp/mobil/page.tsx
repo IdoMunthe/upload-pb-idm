@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type Mobil = {
   tipe: string;
@@ -33,6 +33,8 @@ export default function MobilPage() {
     tinggi: 0,
     allowance: 0,
   });
+  const [selectedTipe, setSelectedTipe] = useState<string | null>(null);
+
 
   const mobilList = dummyData[currentTab];
 
@@ -49,6 +51,15 @@ export default function MobilPage() {
   };
 
   const volume = form.panjang * form.lebar * form.tinggi;
+
+  useEffect(() => {
+    const first = dummyData[currentTab][0];
+    if (first) {
+      setForm({ ...first });
+      setSelectedTipe(first.tipe);
+    }
+  }, [currentTab]);
+  
 
   return (
     <div className="p-4 min-h-screen bg-[#59a7df] text-white">
@@ -149,20 +160,35 @@ export default function MobilPage() {
           </tr>
         </thead>
         <tbody>
-          {mobilList.map((mobil) => (
-            <tr key={mobil.tipe} className="hover:bg-blue-100">
-              <td className="p-2 border border-gray-400">{mobil.tipe}</td>
-              <td className="p-2 border border-gray-400">{mobil.panjang}</td>
-              <td className="p-2 border border-gray-400">{mobil.lebar}</td>
-              <td className="p-2 border border-gray-400">{mobil.tinggi}</td>
-              <td className="p-2 border border-gray-400">
-                {(mobil.panjang * mobil.lebar * mobil.tinggi).toLocaleString()}
-              </td>
-              <td className="p-2 border border-gray-400">
-                {mobil.allowance.toFixed(2)}
-              </td>
-            </tr>
-          ))}
+          {mobilList.map((mobil) => {
+            const isSelected = selectedTipe === mobil.tipe;
+            return (
+              <tr
+                key={mobil.tipe}
+                className={`cursor-pointer ${
+                  isSelected ? "bg-blue-200" : "hover:bg-blue-100"
+                }`}
+                onClick={() => {
+                  setForm({...mobil});
+                  setSelectedTipe(mobil.tipe)
+                }}
+              >
+                <td className="p-2 border border-gray-400">{mobil.tipe}</td>
+                <td className="p-2 border border-gray-400">{mobil.panjang}</td>
+                <td className="p-2 border border-gray-400">{mobil.lebar}</td>
+                <td className="p-2 border border-gray-400">{mobil.tinggi}</td>
+                <td className="p-2 border border-gray-400">
+                  {(
+                    mobil.panjang *
+                    mobil.lebar *
+                    mobil.tinggi
+                  ).toLocaleString()}
+                </td>
+                <td className="p-2 border border-gray-400">
+                  {mobil.allowance.toFixed(2)}
+                </td>
+              </tr>
+            );})}
         </tbody>
       </table>
     </div>
