@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type Kontainer = {
   jenis: string;
@@ -27,6 +27,7 @@ export default function KontainerPage() {
     lebar: 0,
     tinggi: 0,
   });
+  const [selectedJenis, setSelectedJenis] = useState<string | null>(null)
 
   const kontainerList = dummyKontainer[currentTab];
   const volume = form.panjang * form.lebar * form.tinggi;
@@ -41,6 +42,14 @@ export default function KontainerPage() {
   const handleInsert = () => {
     alert(`Inserting: ${JSON.stringify({ ...form, volume })}`);
   };
+
+  useEffect(() => {
+      const first = dummyKontainer[currentTab][0];
+      if (first) {
+        setForm({ ...first });
+        setSelectedJenis(first.jenis);
+      }
+    }, [currentTab]);
 
   return (
     <div className="p-4 min-h-screen bg-[#59a7df] text-white">
@@ -129,8 +138,10 @@ export default function KontainerPage() {
           </tr>
         </thead>
         <tbody>
-          {kontainerList.map((k) => (
-            <tr key={k.jenis} className="hover:bg-blue-100">
+          {kontainerList.map((k) => 
+            {const isSelected = selectedJenis === k.jenis
+          return (
+            <tr key={k.jenis} className={`${isSelected ? "bg-blue-200" : "hover:bg-blue-100"}`} onClick={() => {setForm({...k}); setSelectedJenis(k.jenis)}}>
               <td className="p-2 border border-gray-400">{k.jenis}</td>
               <td className="p-2 border border-gray-400">{k.panjang}</td>
               <td className="p-2 border border-gray-400">{k.lebar}</td>
@@ -142,7 +153,7 @@ export default function KontainerPage() {
                 })}
               </td>
             </tr>
-          ))}
+          )})}
         </tbody>
       </table>
     </div>

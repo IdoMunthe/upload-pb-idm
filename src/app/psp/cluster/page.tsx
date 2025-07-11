@@ -191,12 +191,18 @@ export default function TokoGateUI() {
 
           <div className="flex justify-start gap-5">
             <label>Kode Toko</label>
-            <input
-              type="text"
+            <select
               value={form.kodeToko}
               onChange={(e) => handleChange("kodeToko", e.target.value)}
               className="text-black font-semibold bg-gray-300 w-[80px] px-1 rounded"
-            />
+            >
+              {/* //TODO: needs api */}
+              <option value="FN8C">FN8C</option>
+              <option value="FN8C">FN8C</option>
+              <option value="FN8C">FN8C</option>
+              <option value="FN8C">FN8C</option>
+              <option value="FN8C">FN8C</option>
+            </select>
           </div>
 
           <div className="flex justify-start gap-4">
@@ -242,22 +248,28 @@ export default function TokoGateUI() {
 
           <div className="flex justify-start gap-6">
             <label>Tipe Mobil</label>
-            <input
-              type="text"
+            <select
               value={form.tipeMobil}
               onChange={(e) => handleChange("tipeMobil", e.target.value)}
-              className="text-black font-semibold bg-gray-300 w-[80px] px-1 rounded"
-            />
+              className="text-black font-semibold bg-gray-300 w-[120px] px-1 rounded"
+            >
+              <option value="DOUBLE">DOUBLE</option>
+              <option value="ENGKLE">ENGKLE</option>
+              <option value="FUSO">FUSO</option>
+              <option value="L300">L300</option>
+            </select>
           </div>
 
           <div className="flex justify-start gap-[1.6rem]">
             <label>Paket IPP</label>
-            <input
-              type="text"
+            <select
               value={form.paketIpp}
               onChange={(e) => handleChange("paketIpp", e.target.value)}
               className="text-black font-semibold bg-gray-300 w-[80px] px-1 rounded"
-            />
+            >
+              <option value="DRY">DRY</option>
+              <option value="ROTI">ROTI</option>
+            </select>
           </div>
         </div>
 
