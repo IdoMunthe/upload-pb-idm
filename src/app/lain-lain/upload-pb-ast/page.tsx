@@ -50,14 +50,18 @@ export default function UploadPBASTPage() {
         />
       </div>
 
-      <div className="p-2 bg-[#337ca8]">
-        <table className="w-full text-black">
+      <div className="p-2 overflow-auto max-h-96 w-auto  flex items-center flex-col">
+        <table className=" text-black">
           <thead className="bg-gray-300">
             <tr>
-              <th className="border border-black">Toko</th>
-              <th className="border border-black">Jml Item</th>
-              <th className="border border-black">Total Qty in CTN</th>
-              <th className="border border-black">Total Qty in PCS</th>
+              <th className="border border-black px-2 py-1">Toko</th>
+              <th className="border border-black px-2 py-1">Jml Item</th>
+              <th className="border border-black px-2 py-1">
+                Total Qty in CTN
+              </th>
+              <th className="border border-black px-2 py-1">
+                Total Qty in PCS
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -79,14 +83,14 @@ export default function UploadPBASTPage() {
         </table>
       </div>
 
-      <div className="mt-2 p-2 bg-[#337ca8]">
-        <table className="w-full text-black">
+      <div className="mt-2 p-2 flex flex-col overflow-auto max-h-96 items-center">
+        <table className=" text-black">
           <thead className="bg-gray-300">
             <tr>
-              <th className="border border-black">PLU</th>
-              <th className="border border-black">Deskripsi</th>
-              <th className="border border-black">Qty in CTN</th>
-              <th className="border border-black">Qty in PCS</th>
+              <th className="border border-black px-4 py-1">PLU</th>
+              <th className="border border-black px-4 py-1 w-72">Deskripsi</th>
+              <th className="border border-black px-4 py-1">Qty in CTN</th>
+              <th className="border border-black px-4 py-1">Qty in PCS</th>
             </tr>
           </thead>
           <tbody>
@@ -108,12 +112,16 @@ export default function UploadPBASTPage() {
         </table>
       </div>
 
-      <div className="bg-white text-black text-xs p-1 mt-1 text-center">
-        F5 - REFRESH PB AST | F8 - UPLOAD + SEND PICKING HH PB AST
-      </div>
-
-      <div className="bg-cyan-300 text-white font-bold text-xs p-1 mt-1 text-center">
-        STATUS
+      <div className="fixed min-w-full bottom-0 mb-2">
+        <div className="bg-white text-black  p-1 mt-1 text-center font-bold">
+          F5 - REFRESH PB AST | F8 - UPLOAD + SEND PICKING HH PB AST
+        </div>
+        <div className="bg-cyan-300 text-white font-bold mt-2 p-1 text-center">
+          STATUS
+        </div>
+        <div className="bg-white text-black  p-1 text-center font-bold h-8">
+          
+        </div>
       </div>
     </div>
   );
